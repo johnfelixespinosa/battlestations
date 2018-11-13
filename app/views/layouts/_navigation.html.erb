@@ -13,8 +13,13 @@
     <div class="collapse navbar-collapse" id="bs-nav-demo">
       <% if user_signed_in? %>
       <ul class="nav navbar-nav">
-        <li><%= link_to "Your Battlestation", root_path %></li>
-        <li><%= link_to "Battlestations", root_path %></li>
+      <% if user_has_battlestation? %>
+        <li><%= link_to "My Dashboard", user_battlestations_path(current_user) %></li>
+        <li><%= link_to "Explore", battlestations_path %></li>
+      <% else %>
+        <li><%= link_to "Add New", new_user_battlestation_path(current_user) %></li>
+        <li><%= link_to "Explore Setups", battlestations_path %></li>
+      <% end %>
         <li><%= notice %></li>
         <li><%= alert %></li>
       </ul>
