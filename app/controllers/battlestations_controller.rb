@@ -1,0 +1,2 @@
+class BattlestationsController < ApplicationController
+end

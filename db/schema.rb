@@ -10,7 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_13_175836) do
+ActiveRecord::Schema.define(version: 2018_11_13_222907) do
+
+  create_table "battlestations", force: :cascade do |t|
+    t.string "name"
+    t.string "cpu"
+    t.string "cpu_cooler"
+    t.string "motherboard"
+    t.string "storage"
+    t.string "video_card"
+    t.string "case"
+    t.string "power_supply"
+    t.string "operating_system"
+    t.string "monitor"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
