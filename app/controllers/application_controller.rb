@@ -1,31 +1,9 @@
 class ApplicationController < ActionController::Base
-  helper_method :login!, :logged_in?, :current_user, :require_login, :authorized_user?, :logout!
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def login!
-    session[:user_id] = @user.id
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
   end
-
-  def logged_in?
-    !!session[:user_id]
-  end
-
-  def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
-  end
-
-  def require_login
-    if !logged_in?
-      flash[:message] = "Login Required"
-      redirect_to '/login'
-    end
-  end
-
-  def authorized_user?
-     @user == current_user
-   end
-
-   def logout!
-     session.clear
-   end
-
 end
