@@ -1,7 +1,10 @@
 <div class="row">
   <% @battlestations.each do |battlestation| %>
-    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-      <h4 class="text-center"> <%= link_to battlestation.name, battlestation_path(battlestation) %></h4>
+    <div class="col-md-4">
+      <h4 class="text-center">
+      <%= link_to battlestation.name, battlestation_path(battlestation) %>
+      <%= link_to image_tag(battlestation.image, class: "img-responsive"), battlestation_path(battlestation) %></h4>
     </div>
   <% end %>
 </div>
+
