@@ -2,11 +2,19 @@ class BattlestationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @battlestations = current_user.battlestations
+    if params[:user_id]
+      @battlestations = User.find(params[:user_id]).battlestations
+    else
+      @battlestations = Battlestation.all
+    end
   end
 
   def new
     @battlestation = Battlestation.new
+  end
+
+  def show
+    @battlestations = Battlestation.find_by_id(params[:id])
   end
 
   def create
@@ -19,10 +27,6 @@ class BattlestationsController < ApplicationController
       flash.now[:message] = "<strong>Please try again. There were some errors:</strong><br>".html_safe + @record.errors.full_messages.join("<br/>").html_safe
       render :new
     end
-  end
-
-  def show
-    @battlestation = Battlestation.find_by_id(params[:id])
   end
 
   def edit
