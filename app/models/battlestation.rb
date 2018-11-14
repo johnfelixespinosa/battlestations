@@ -1,6 +1,6 @@
 class Battlestation < ApplicationRecord
   belongs_to :user
-  has_many_attached :images
+  has_one_attached :image
 
   validates :name,             presence: true
   validates :cpu,              presence: true
@@ -12,6 +12,5 @@ class Battlestation < ApplicationRecord
   validates :power_supply,     presence: true
   validates :operating_system, presence: true
   validates :monitor,          presence: true
-  validate :image_validated?
 
 end

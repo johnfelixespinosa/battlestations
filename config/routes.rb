@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   devise_for :users
 
-  resources :battlestations, only: [:index]
+  resources :battlestations
 
   root to: 'static_pages#home'
 

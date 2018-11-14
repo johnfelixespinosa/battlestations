@@ -1,0 +1,9 @@
+<div class="row">
+  <% @battlestations.each do |battlestation| %>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+        <h4 class="text-center"> <%= battlestation.name %></h4>
+        <%= link_to 'Edit', edit_user_battlesation_path(battlestation) %>
+      </div>
+    </div>
+  <% end %>
+</div>
