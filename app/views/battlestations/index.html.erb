@@ -4,6 +4,10 @@
       <h4 class="text-center">
       <%= link_to battlestation.name, battlestation_path(battlestation) %>
       <%= link_to image_tag(battlestation.image, class: "img-responsive"), battlestation_path(battlestation) %></h4>
+      <% if user_signed_in? && current_user == battlestation.user %>
+        <%= link_to "Edit Battlestation", edit_battlestation_path(battlestation), class: 'btn btn-primary btn-block' %>
+        <%= link_to "Delete Battlestation", battlestation, method: :delete, data: { confirm: "Are you sure you want to delete?" }, class: 'btn btn-danger btn-block offset-2' %>
+      <% end %>
     </div>
   <% end %>
 </div>
