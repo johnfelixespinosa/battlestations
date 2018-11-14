@@ -1,5 +1,6 @@
 <%= @battlestation.name %><br>
 <%= @battlestation.user.username %><br>
 
-
-  <%= image_tag @battlestation.image %> <br />
+<div style="width:600px; height:600px;">
+  <%= image_tag(@battlestation.image, style:'width:100%; height: auto') %> <br>
+</div>

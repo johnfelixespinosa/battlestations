@@ -9,19 +9,18 @@ class BattlestationsController < ApplicationController
     end
   end
 
+  def show
+    @battlestation = Battlestation.find(params[:id])
+  end
+
   def new
     @battlestation = Battlestation.new
   end
 
-  def show
-    @battlestations = Battlestation.find_by_id(params[:id])
-  end
-
   def create
-    @battlestation = Battlestation.new(battlestation_params)
-    @battlestation.user = current_user
+    @battlestation = current_user.battlestations.build(battlestation_params)
     if @battlestation.save
-      flash[:success] = "Record successfuly created!"
+      flash[:success] = "Battlestation successfuly created!"
       redirect_to battlestation_path(@battlestation)
     else
       flash.now[:message] = "<strong>Please try again. There were some errors:</strong><br>".html_safe + @record.errors.full_messages.join("<br/>").html_safe
@@ -30,7 +29,7 @@ class BattlestationsController < ApplicationController
   end
 
   def edit
-    @battlestation = Battlestation.find_by_id(params[:id])
+    @battlestation = Battlestation.find_by(id: params[:id])
   end
 
   def update
