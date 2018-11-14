@@ -1,6 +1,53 @@
-<%= @battlestation.name %><br>
-<%= @battlestation.user.username %><br>
+<div class="container">  
+  <div class="row">
+    
+    <div class="col-md-8">
+      <div style="width:500px; height:500px;">
+        <h4 class="image-heading">Images</h4>
+        <%= image_tag(@battlestation.image, style:'width:auto; height: 100%') %>
+      </div>
+    </div>
 
-<div style="width:600px; height:600px;">
-  <%= image_tag(@battlestation.image, style:'width:100%; height: auto') %> <br>
+    <div class="col-md-3">
+    <ul class="list-group">
+      <h4 class="list-group-item-heading">Components</h4>
+      <li class="list-group-item">
+        <span class="label label-default">CPU</span>
+        <label><%= @battlestation.cpu %></label>
+      </li>
+      <li class="list-group-item">
+        <span class="label label-default">CPU Cooler</span>
+        <label><%= @battlestation.cpu_cooler %></label>
+      </li>
+      <li class="list-group-item">
+        <span class="label label-default">Motherboard</span>
+        <label><%= @battlestation.motherboard %></label>
+      </li>
+      <li class="list-group-item">
+        <span class="label label-default">Storage</span>
+        <label><%= @battlestation.storage %></label>
+      </li>
+      <li class="list-group-item">
+        <span class="label label-default">Video Card</span>
+        <label><%= @battlestation.video_card %></label>
+      </li>
+      <li class="list-group-item">
+        <span class="label label-default">Case</span>
+        <label><%= @battlestation.case %></label>
+      </li>
+      <li class="list-group-item">
+        <span class="label label-default">Power Supply</span>
+        <label><%= @battlestation.power_supply %></label>
+      </li>
+      <li class="list-group-item">
+        <span class="label label-default">Operating System</span>
+        <label><%= @battlestation.operating_system %></label>
+      </li>
+      <li class="list-group-item">
+        <span class="label label-default">Monitor</span>
+        <label><%= @battlestation.monitor %></label>
+      </li>
+    </ul>
+    </div>
+  </div>
 </div>
