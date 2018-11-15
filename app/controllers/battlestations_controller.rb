@@ -1,5 +1,6 @@
 class BattlestationsController < ApplicationController
   before_action :authenticate_user!
+  before_action :find_battlestation, only: [:show, :edit, :update, :destroy]
 
   def index
     if params[:user_id]
@@ -10,7 +11,6 @@ class BattlestationsController < ApplicationController
   end
 
   def show
-    @battlestation = Battlestation.find(params[:id])
   end
 
   def new
@@ -29,16 +29,32 @@ class BattlestationsController < ApplicationController
   end
 
   def edit
-    @battlestation = Battlestation.find_by(id: params[:id])
   end
 
   def update
+    if @battlestation.user == current_user
+      @battlestation.update(battlestation_params)
+      if @battlestation.save
+        flash[:success] = "Battlestation successfuly updated!"
+        redirect_to battlestation_path(@battlestation)
+      else
+        flash.now[:message] = "<strong>Please try again. There were some errors:</strong><br>".html_safe + @record.errors.full_messages.join("<br/>").html_safe
+        render :new
+      end
+    else
+      flash[:message] = "You don't have permission to do that"
+      redirect_to root
+    end
   end
 
   def destroy
   end
 
   private
+
+    def find_battlestation
+      @battlestation = Battlestation.find_by(id: params[:id])
+    end
     
     def battlestation_params
       params.require(:battlestation).permit(
