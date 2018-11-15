@@ -1,23 +1,34 @@
-<div class="row">
-  <% @battlestations.each do |battlestation| %>
-    <div class="col-md-4">
-      <h4 class="text-center">
+<div class="container">
+  <div class="row">
+    <% @battlestations.each do |battlestation| %>
+    
+    <% if @battlestations.any? { |b| b.user != current_user} ||
+      @battlestations.map { |b| b.user }.uniq.size > @battlestations.size%>
+      
+      <div class="col-md-4">
+        <h4 class="text-center">
+          <%= link_to battlestation.name, battlestation_path(battlestation) %>
+          <%= link_to image_tag(battlestation.image, class: "img-responsive"), battlestation_path(battlestation) %></h4>
+      
+    <% else %>
 
-      <% if @battlestations.any? { |b| b.user != current_user} ||
-      @battlestations.map { |b| b.user }.uniq.size > @battlestations.size
-      %>
+      <div class="col-md-4">
+        <h4 class="text-center">
+          <%= link_to battlestation.name, battlestation_path(battlestation) %>
+          <%= link_to image_tag(battlestation.image, class: "img-responsive"), battlestation_path(battlestation) %></h4>
+          <%= link_to "Edit Battlestation", edit_battlestation_path(battlestation), class: 'btn btn-primary btn-block' %>
+          <%= link_to "Delete Battlestation", battlestation, method: :delete, data: { confirm: "Are you sure you want to delete?" }, class: 'btn btn-danger btn-block offset-2' %>
 
-      <%= link_to battlestation.name, battlestation_path(battlestation) %>
-      <%= link_to image_tag(battlestation.image, class: "img-responsive"), battlestation_path(battlestation) %></h4>
-
-      <% else %>
-
-      <%= link_to battlestation.name, battlestation_path(battlestation) %>
-      <%= link_to image_tag(battlestation.image, class: "img-responsive"), battlestation_path(battlestation) %></h4>
-      <%= link_to "Edit Battlestation", edit_battlestation_path(battlestation), class: 'btn btn-primary btn-block' %>
-      <%= link_to "Delete Battlestation", battlestation, method: :delete, data: { confirm: "Are you sure you want to delete?" }, class: 'btn btn-danger btn-block offset-2' %>
       <% end %>
-    </div>
-  <% end %>
+      </div>
+    <% end %>
+          <div class="index_container">
+        <ul class="nav">
+          <li class="nav-item">
+            <%= link_to "Add New", new_user_battlestation_path(current_user) %></button>
+          </li>
+        </ul>
+      </div>
+  </div>
 </div>
 
