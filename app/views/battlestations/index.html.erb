@@ -6,8 +6,8 @@
 
       <% @battlestations.each do |battlestation| %>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-          <h4 class="text-center"> <%= battlestation.name %></h4>
-          <h5 class="text-center"> <%= battlestation.user.username  %></h5>
+          <h4 class="text-center"><%= battlestation.name %></h4>
+          <h5 class="text-center"><%= link_to battlestation.user.username.capitalize, user_battlestations_path(battlestation.user)  %></h5>
             <div class="thumbnail">
               <%= link_to image_tag(battlestation.image, class: "img-responsive"), battlestation_path(battlestation) %>
             </div>
@@ -15,6 +15,7 @@
       <% end %>
 
     <% else %>
+
       <nav class="navbar navbar-light bg-light">
         <ul class="navbar-brand">
           <%= link_to "Add New", new_user_battlestation_path(current_user) %>
