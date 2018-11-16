@@ -5,6 +5,7 @@
       @battlestations.map { |b| b.user }.uniq.size > @battlestations.size %>
 
       <% @battlestations.each do |battlestation| %>
+      
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
           <h4 class="text-center"><%= battlestation.name %></h4>
           <h5 class="text-center"><%= link_to battlestation.user.username.capitalize, user_battlestations_path(battlestation.user)  %></h5>
