@@ -1,26 +1,50 @@
-<div class="card-group">
-  <div class="card">
-    <img class="card-img-top" src=".../100px180/" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <img class="card-img-top" src=".../100px180/" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <img class="card-img-top" src=".../100px180/" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
+<div class="container">
+  <div class="row">
+
+    <% if @battlestations.any? { |b| b.user != current_user} ||
+      @battlestations.map { |b| b.user }.uniq.size > @battlestations.size %>
+
+      <h1 class="display-4 text-xs-center m-y-3 text-muted">Member Builds</h1>
+      <% @battlestations.each_slice(3) do |battlestations| %>        
+        <div class="card-deck ">
+          <% battlestations.each do |battlestation| %>
+            <div class="card bg-dark text-white">
+            <div class="card-header text-center">
+              <%= battlestation.name %>
+            </div>
+              <%= link_to image_tag(battlestation.image, class: "card-img"), battlestation_path(battlestation) %></img>
+            <div class="card-footer bg-transparent border-success text-center">Submitted by: <%= link_to battlestation.user.username, user_battlestations_path(battlestation.user) %></div>
+            </div>
+          <% end %>      
+        </div>
+        <br>    
+       <% end %>
+
+    <% else %>
+
+      <h1 class="display-4 text-xs-center m-y-3 text-muted">Your Builds</h1>
+      <nav class="navbar navbar-light bg-light">
+        <ul class="navbar-brand">
+          <%= link_to "Add New", new_user_battlestation_path(current_user) %>
+        </ul>
+      </nav>
+      <% @battlestations.each_slice(3) do |battlestations| %>        
+        <div class="card-deck ">
+          <% battlestations.each do |battlestation| %>
+            <div class="card bg-dark text-white">
+            <div class="card-header text-center">
+              <%= battlestation.name %>
+            </div>
+              <%= link_to image_tag(battlestation.image, class: "card-img"), battlestation_path(battlestation) %></img>
+            <div class="card-footer bg-transparent border-success text-center">
+              <%= link_to "Edit Battlestation", edit_battlestation_path(battlestation), class: 'btn btn-primary btn-block' %>
+              <%= link_to "Delete Battlestation", battlestation, method: :delete, data: { confirm: "Are you sure you want to delete?" }, class: 'btn btn-danger btn-block offset-2' %>
+            </div>
+            </div>
+          <% end %>
+        </div>
+        </br>
+      <% end %>
+    <% end %>
   </div>
 </div>
