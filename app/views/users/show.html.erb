@@ -1,1 +1,32 @@
-<%= current_user.username %>, Welcome!
+<div class="container">
+
+  <div class="col-md-2 col-md-offset-5"></div>
+  <h1><%= @user.username.titleize %></h1>
+  <h3><%= @user.email %></h3>
+  
+    <% if user_signed_in? && current_user == @user %>
+      <%= link_to "Battlestations", user_battlestations_path(current_user) %> <br>
+      <%= link_to "Log Out", '/logout', {method: 'post'} %>
+    <% else %>
+      <%= link_to "Battlestations", user_battlestations_path(@user) %> <br>
+    <% end %>
+
+  <div class="row">
+  <div class="pane">
+    
+    <div class="col-sm-4">Member Since: 
+      <%= @user.remember_created_at %>
+    </div>
+
+    <div class="col-sm-4">Total Battlestations:
+      <%= @user.battlestations.count %>
+    </div>
+
+    <div class="col-sm-4">Last Updated:
+      <%= @user.battlestations.last.name unless @user.battlestations.empty? %>
+    </div>
+
+  </div>
+  </div>
+
+</div>
